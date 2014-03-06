@@ -426,9 +426,11 @@ algxControllers.controller('algxController', ["$scope", "$location", function($s
     $("#reset").click(gettingCurrentMove(twistyScene.play.reset));
     $("#back").click(gettingCurrentMove(twistyScene.play.back));
     $("#play").click(function() {
+      // We create two packed functions inside the listener's scope
       var start = gettingCurrentMove(twistyScene.play.start);
       var reset = gettingCurrentMove(twistyScene.play.reset);
       
+      // And if we are on the last move, we reset the animation
       return function() {
         if ($scope.current_move === algo.length) {
           reset();
