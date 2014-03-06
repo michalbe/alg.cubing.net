@@ -425,7 +425,17 @@ algxControllers.controller('algxController', ["$scope", "$location", function($s
 
     $("#reset").click(gettingCurrentMove(twistyScene.play.reset));
     $("#back").click(gettingCurrentMove(twistyScene.play.back));
-    $("#play").click(gettingCurrentMove(twistyScene.play.start));
+    $("#play").click(function() {
+      var start = gettingCurrentMove(twistyScene.play.start);
+      var reset = gettingCurrentMove(twistyScene.play.reset);
+      
+      return function() {
+        if ($scope.current_move === algo.length) {
+          reset();
+        }
+        start(); 
+      }
+    }());
     $("#pause").click(gettingCurrentMove(twistyScene.play.pause));
     $("#forward").click(gettingCurrentMove(twistyScene.play.forward));
     $("#skip").click(gettingCurrentMove(twistyScene.play.skip));
